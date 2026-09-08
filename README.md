@@ -2,7 +2,7 @@
 
 个人主页：**[https://guitaristff.github.io/](https://guitaristff.github.io/)** · [English](https://guitaristff.github.io/?lang=en)
 
-仿照 [Meng Xu 的学术主页](https://mengxu95.github.io/) 的信息结构制作：顶部导航、左侧个人资料、中间学术内容、右侧兴趣互动。纯静态 HTML/CSS/JavaScript，默认中文，可切换英文并记住选择。配色采用暖象牙白、炭黑与铝灰，蓝色用于链接和细线，金色点缀少量标签与年份。
+仿照 [Meng Xu 的学术主页](https://mengxu95.github.io/) 的信息结构制作：顶部导航、左侧个人资料、中间学术内容、右侧兴趣互动。纯静态 HTML/CSS/JavaScript，默认中文，可切换英文并记住选择。全站采用中性暖白 `#EFEEE9`、暖灰卡片 `#E7E6E1`、炭黑文字 `#20211F`、冷铝灰 `#A9ABAA` 和钢蓝 `#315B78`；旧金色 `#9B865F` 点缀少量标签、年份与焦点边框。骑行卡片及其收起按钮单独保留原配色。
 
 ## 本地预览
 

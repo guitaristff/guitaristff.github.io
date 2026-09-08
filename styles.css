@@ -1,13 +1,13 @@
 :root {
   color-scheme: light;
-  --bg: #EEEAE1;
-  --surface: #E4DFD4;
-  --text: #1D1E1C;
-  --text-muted: #66665F;
-  --metal: #A7A69F;
-  --bmw-blue: #315F88;
-  --heritage-gold: #A28450;
-  --line: color-mix(in srgb, var(--metal) 60%, var(--bg));
+  --bg: #EFEEE9;
+  --surface: #E7E6E1;
+  --text: #20211F;
+  --text-muted: #686963;
+  --metal: #A9ABAA;
+  --bmw-blue: #315B78;
+  --heritage-gold: #9B865F;
+  --line: color-mix(in srgb, var(--metal) 52%, var(--bg));
   --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 *, *::before, *::after { box-sizing: border-box; }
@@ -137,6 +137,18 @@ img, svg { display: block; max-width: 100%; }
 .life-sidebar { position: sticky; top: 98px; min-width: 0; }
 .sidebar-panel { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
 .sidebar-panel + .sidebar-panel { margin-top: 21px; }
+/* Keep the riding card and its restore button in their original palette. */
+.ride-panel, #companion-ride {
+  --bg: #EEEAE1;
+  --surface: #E4DFD4;
+  --text: #1D1E1C;
+  --text-muted: #66665F;
+  --metal: #A7A69F;
+  --bmw-blue: #315F88;
+  --heritage-gold: #A28450;
+  --line: color-mix(in srgb, var(--metal) 60%, var(--bg));
+  color: var(--text);
+}
 .ride-panel { background: #fffefa; border-color: #d2d9d2; }
 .ride-panel .panel-heading { border-bottom-color: #e1e3d9; }
 .ride-panel .panel-heading .eyebrow { color: #a9543a; }
