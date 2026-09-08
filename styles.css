@@ -461,6 +461,82 @@ html[lang="en"] .research-copy h3 span { font-size: 14px; }
   .album-info strong { font-size: 15px; }
   .music-source, .music-source a { font-size: 9px; }
 }
+.companion-widget, .companion-close { display: none; }
+
+/* Enabled only by the phone media query; the desktop sidebar keeps its layout. */
+html.mobile-companions { scroll-padding-bottom: calc(102px + env(safe-area-inset-bottom, 0px)); }
+.mobile-companions body { padding-bottom: calc(102px + env(safe-area-inset-bottom, 0px)); }
+.mobile-companions.companions-minimized body { padding-bottom: calc(66px + env(safe-area-inset-bottom, 0px)); }
+.mobile-companions .companion-widget {
+  display: block; position: fixed; z-index: 41;
+  right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  width: min(420px, calc(100vw - 24px));
+}
+.mobile-companions .companion-dock {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) 44px; align-items: center;
+  padding: 7px; gap: 4px; border: 1px solid var(--line); border-radius: 16px;
+  background: var(--bg); box-shadow: 0 5px 25px #1d1e1c24;
+}
+.mobile-companions .companion-launcher {
+  display: flex; align-items: center; gap: 8px; min-width: 0; min-height: 56px;
+  padding: 4px; border-radius: 10px; text-align: left;
+}
+.mobile-companions .companion-launcher[aria-expanded="true"] { background: var(--surface); }
+.mobile-companions .companion-preview { display: block; flex: 0 0 54px; height: 46px; border-radius: 8px; overflow: hidden; background: #dfe6d9 url('assets/bmw-r-ninet.svg') center / 48px auto no-repeat; pointer-events: none; }
+.mobile-companions .companion-preview .tracking-art { width: 60px; height: 46px; border: 0; }
+.mobile-companions .companion-preview .tracking-scene { width: 60px; height: 46px; max-width: none; }
+.mobile-companions .companion-caption { display: flex; flex-direction: column; min-width: 0; gap: 3px; line-height: 1.4; }
+.mobile-companions .companion-caption strong { font-size: 12px; font-weight: 700; white-space: nowrap; }
+.mobile-companions .companion-caption > span { font-size: 10px; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mobile-companions .companion-cover { display: block; position: relative; flex: 0 0 38px; }
+.mobile-companions .companion-cover img { width: 38px; height: 38px; border-radius: 5px; object-fit: cover; }
+.mobile-companions .companion-playing { display: none; width: 7px; height: 7px; border-radius: 50%; background: #35735b; flex-shrink: 0; }
+.mobile-companions .music-is-playing .companion-playing { display: inline-block; }
+.mobile-companions .companion-cover .companion-playing { position: absolute; right: -2px; bottom: -2px; width: 10px; height: 10px; border: 2px solid var(--bg); }
+.mobile-companions .companion-minimize { display: flex; flex-direction: column; align-items: center; justify-content: center; align-self: stretch; border-left: 1px solid var(--line); font-size: 10px; padding: 0; color: var(--text-muted); }
+.mobile-companions .companion-minimize > span:first-child { font-size: 23px; line-height: 1; margin-bottom: 3px; }
+.mobile-companions .companion-restore { display: none; align-items: center; gap: 8px; margin-left: auto; min-height: 44px; padding: 8px 13px; border: 1px solid var(--line); border-radius: 24px; background: var(--bg); box-shadow: 0 3px 15px #1d1e1c20; font-size: 12px; }
+.mobile-companions .companion-restore .icon { width: 19px; height: 19px; color: #3a6657; }
+.mobile-companions.companions-minimized .companion-widget { width: auto; }
+.mobile-companions.companions-minimized .companion-dock { display: none; }
+.mobile-companions.companions-minimized .companion-restore { display: flex; }
+.mobile-companions .life-sidebar {
+  display: none; position: fixed; top: auto; z-index: 40;
+  right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(94px + env(safe-area-inset-bottom, 0px));
+  width: min(360px, calc(100vw - 24px)); margin: 0;
+}
+.mobile-companions .life-sidebar.companion-open { display: block; }
+.mobile-companions .life-sidebar .sidebar-panel, .mobile-companions .sidebar-signoff { display: none; }
+.mobile-companions .life-sidebar .companion-active { display: block; margin: 0; max-height: min(52dvh, 420px); overflow-y: auto; overscroll-behavior: contain; border-radius: 15px; box-shadow: 0 8px 32px #1d1e1c30; scrollbar-width: thin; }
+.mobile-companions .life-sidebar .panel-heading { position: sticky; top: 0; z-index: 1; padding: 9px 14px; background: inherit; }
+.mobile-companions .life-sidebar .panel-heading .eyebrow { font-size: 9px; }
+.mobile-companions .life-sidebar .panel-heading h2 { font-size: 18px; }
+.mobile-companions .life-sidebar .music-panel .panel-heading > .icon { display: none; }
+.mobile-companions .companion-close { display: flex; align-items: center; gap: 5px; min-height: 44px; padding: 5px 8px; color: var(--text-muted); font-size: 11px; }
+.mobile-companions .companion-close > span:first-child { font-size: 20px; }
+.mobile-companions .life-sidebar .tracking-scene { height: min(30dvh, 250px); }
+.mobile-companions .life-sidebar .scene-controls { padding: 8px 12px; }
+.mobile-companions .life-sidebar .scene-modes button { min-height: 40px; }
+.mobile-companions .life-sidebar #motion-toggle { width: 40px; min-height: 40px; }
+.mobile-companions .life-sidebar .album-layout { padding: 14px; gap: 14px; flex-direction: row; }
+.mobile-companions .life-sidebar .album-cover-link, .mobile-companions .life-sidebar .album-cover-link img { width: 72px; height: 72px; }
+.mobile-companions .life-sidebar .album-info strong { font-size: 15px; }
+.mobile-companions .life-sidebar .album-info > span:not(.music-tag) { font-size: 11px; }
+.mobile-companions .life-sidebar .music-player { padding: 2px 14px 4px; }
+.mobile-companions .life-sidebar #music-toggle { min-height: 44px; font-size: 12px; }
+.mobile-companions .life-sidebar .music-time { font-size: 10px; }
+.mobile-companions .life-sidebar .music-progress { width: calc(100% - 28px); margin: 6px 14px; height: 22px; }
+.mobile-companions .life-sidebar .music-source { margin: 8px 14px 0; }
+.mobile-companions .life-sidebar .music-note { padding: 9px 14px; margin-top: 10px; font-size: 11px; }
+.mobile-companions .toast { bottom: calc(100px + env(safe-area-inset-bottom, 0px)); }
+
+@media (max-width: 360px) {
+  .mobile-companions .companion-launcher { gap: 6px; }
+  .mobile-companions .companion-preview { flex-basis: 42px; }
+  .mobile-companions .companion-caption strong { font-size: 11px; }
+  .mobile-companions .companion-cover { flex-basis: 32px; }
+  .mobile-companions .companion-cover img { width: 32px; height: 32px; }
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }

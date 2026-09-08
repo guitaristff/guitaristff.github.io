@@ -22,7 +22,11 @@
       audioBlocked: '浏览器限制了音频播放。请再次点击，或在浏览器中打开本站。',
       audioTimeout: '歌曲加载超时。请重试，或通过网易云音乐收听。',
       audioPlaying: '正在播放痛仰《四相》', audioPaused: '播放已暂停',
-      platform: '实物平台', imageAlt: '自建无人机实物平台'
+      platform: '实物平台', imageAlt: '自建无人机实物平台',
+      rideWindow: '打开骑行浮窗', musicWindow: '打开《四相》音乐浮窗',
+      hideCompanions: '收起骑行与音乐浮栏', showCompanions: '展开骑行与音乐浮栏',
+      musicArtist: '痛仰乐队', compactPlaying: '正在播放', compactPaused: '已暂停',
+      compactLoading: '正在加载', compactError: '点开重试'
     },
     en: {
       copy: 'Copy email', copied: 'Email copied',
@@ -37,7 +41,11 @@
       audioBlocked: 'The browser blocked playback. Press play again, or open this site in a browser.',
       audioTimeout: 'The song timed out. Retry or listen on NetEase Music.',
       audioPlaying: 'Playing 四相 by Miserable Faith', audioPaused: 'Music paused',
-      platform: 'UAV platform', imageAlt: 'Custom-built UAV platform'
+      platform: 'UAV platform', imageAlt: 'Custom-built UAV platform',
+      rideWindow: 'Open the riding window', musicWindow: 'Open the 四相 music window',
+      hideCompanions: 'Hide the riding and music bar', showCompanions: 'Show the riding and music bar',
+      musicArtist: 'Miserable Faith', compactPlaying: 'Playing', compactPaused: 'Paused',
+      compactLoading: 'Loading', compactError: 'Tap to retry'
     }
   };
   const t = (key) => labels[language][key];
@@ -266,6 +274,7 @@
     audioStatus.classList.toggle('sr-only', !failed);
     audioStatus.classList.toggle('music-error', failed);
     audioStatus.textContent = failed ? t(musicError) : (loading ? t('audioLoading') : (playing ? t('audioPlaying') : (musicState === 'paused' ? t('audioPaused') : '')));
+    updateCompanionLabels();
   }
   function updateMusicTime() {
     const hasDuration = musicState !== 'error' && Number.isFinite(player.duration) && player.duration > 0;
@@ -379,6 +388,108 @@
   window.addEventListener('pagehide', () => {
     if (['loading', 'playing'].includes(musicState)) stopMusic();
   });
+
+  // On phones, reuse the same live scene and audio player in compact floating windows.
+  const mobileLayout = matchMedia('(max-width: 640px), (max-width: 950px) and (max-height: 500px) and (pointer: coarse)');
+  const companions = $('#mobile-companions');
+  const lifeSidebar = $('#off-duty');
+  const ridePanel = $('#ride-panel');
+  const musicPanel = $('#music-panel');
+  const trackingArt = $('.tracking-art');
+  const sceneHome = document.createComment('Full-size riding scene');
+  trackingArt.before(sceneHome);
+  const companionButtons = { ride: $('#companion-ride'), music: $('#companion-music') };
+  const companionPanels = { ride: ridePanel, music: musicPanel };
+  const COMPACT_KEY = 'zhaofeng-companions-minimized';
+  let companionPanel = '';
+  let companionsMinimized = false;
+  try { companionsMinimized = sessionStorage.getItem(COMPACT_KEY) === 'true'; } catch { /* Keep the initial floating bar visible. */ }
+
+  function updateCompanionLabels() {
+    $('#companion-ride').setAttribute('aria-label', t('rideWindow'));
+    $('#companion-music').setAttribute('aria-label', t('musicWindow'));
+    $('#companion-minimize').setAttribute('aria-label', t('hideCompanions'));
+    $('#companion-restore').setAttribute('aria-label', t('showCompanions'));
+    const status = {playing: 'compactPlaying', paused: 'compactPaused', loading: 'compactLoading', error: 'compactError'};
+    $('#companion-music-status').textContent = t(status[musicState] || 'musicArtist');
+    $('#mobile-companions').classList.toggle('music-is-playing', musicState === 'playing');
+  }
+
+  function renderCompanions() {
+    const mobile = mobileLayout.matches;
+    document.documentElement.classList.toggle('mobile-companions', mobile);
+    document.documentElement.classList.toggle('companions-minimized', mobile && companionsMinimized);
+    lifeSidebar.classList.toggle('companion-open', mobile && Boolean(companionPanel));
+    for (const [name, panel] of Object.entries(companionPanels)) {
+      const active = mobile && companionPanel === name;
+      panel.classList.toggle('companion-active', active);
+      companionButtons[name].setAttribute('aria-expanded', String(active));
+    }
+    // Move, rather than duplicate, the animated SVG so both views share its state.
+    if (mobile && companionPanel !== 'ride') $('#companion-ride-preview').append(trackingArt);
+    else sceneHome.after(trackingArt);
+  }
+
+  function closeCompanion(restoreFocus = false) {
+    const previous = companionPanel;
+    companionPanel = '';
+    renderCompanions();
+    if (restoreFocus && previous) companionButtons[previous].focus({preventScroll: true});
+  }
+
+  function openCompanion(name) {
+    if (!mobileLayout.matches) return;
+    closeMenu();
+    companionsMinimized = false;
+    companionPanel = companionPanel === name ? '' : name;
+    renderCompanions();
+    if (companionPanel) {
+      companionPanels[name].scrollTop = 0;
+      $('.companion-close', companionPanels[name]).focus({preventScroll: true});
+    }
+  }
+
+  for (const [name, button] of Object.entries(companionButtons)) {
+    button.addEventListener('click', () => openCompanion(name));
+  }
+  $$('.companion-close').forEach((button) => button.addEventListener('click', () => closeCompanion(true)));
+  $('#companion-minimize').addEventListener('click', () => {
+    companionsMinimized = true;
+    closeCompanion();
+    try { sessionStorage.setItem(COMPACT_KEY, 'true'); } catch { /* Storage is optional. */ }
+    $('#companion-restore').focus({preventScroll: true});
+  });
+  $('#companion-restore').addEventListener('click', () => {
+    companionsMinimized = false;
+    renderCompanions();
+    try { sessionStorage.setItem(COMPACT_KEY, 'false'); } catch { /* Storage is optional. */ }
+    companionButtons.ride.focus({preventScroll: true});
+  });
+  document.addEventListener('click', (event) => {
+    if (companionPanel && !lifeSidebar.contains(event.target) && !companions.contains(event.target)) closeCompanion();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && companionPanel) closeCompanion(true);
+  });
+  window.addEventListener('scroll', () => {
+    if (companionPanel) closeCompanion();
+  }, {passive: true});
+  $('.main-nav a[href="#off-duty"]').addEventListener('click', (event) => {
+    if (!mobileLayout.matches) return;
+    event.preventDefault();
+    event.stopPropagation();
+    openCompanion('ride');
+  });
+  mobileLayout.addEventListener('change', () => {
+    const hadFloatingFocus = companions.contains(document.activeElement) || document.activeElement.matches('.companion-close');
+    companionPanel = '';
+    renderCompanions();
+    if (hadFloatingFocus) {
+      const target = mobileLayout.matches ? (companionsMinimized ? $('#companion-restore') : companionButtons.ride) : $('#motion-toggle');
+      target.focus({preventScroll: true});
+    }
+  });
+  renderCompanions();
 
   $('#copy-email').addEventListener('click', async () => {
     try {

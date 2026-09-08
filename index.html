@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <meta name="theme-color" content="#EEEAE1">
   <meta name="description" content="杜兆丰 Zhaofeng Du，北京理工大学控制科学与工程博士研究生。目标状态估计、无人机目标跟踪、运动规划、FBSR、RAFT 与自建无人机实物平台。">
@@ -14,8 +14,8 @@
   <title>杜兆丰 Zhaofeng Du | 无人机目标跟踪</title>
   <link rel="canonical" href="https://guitaristff.github.io/">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=netease-1">
-  <script src="app.js?v=netease-1" defer></script>
+  <link rel="stylesheet" href="styles.css?v=mobile-float-1">
+  <script src="app.js?v=mobile-float-1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main" data-en="Skip to content">跳至正文</a>
@@ -128,8 +128,8 @@
     </main>
 
     <aside class="life-sidebar" id="off-duty" aria-label="Beyond research">
-      <section class="sidebar-panel ride-panel" aria-labelledby="ride-title">
-        <div class="panel-heading"><div><span class="eyebrow warm" data-en="BETWEEN EXPERIMENTS">实验之外</span><h2 id="ride-title" data-en="On the road">骑行与追踪</h2></div></div>
+      <section class="sidebar-panel ride-panel" id="ride-panel" aria-labelledby="ride-title">
+        <div class="panel-heading"><div><span class="eyebrow warm" data-en="BETWEEN EXPERIMENTS">实验之外</span><h2 id="ride-title" data-en="On the road">骑行与追踪</h2></div><button class="companion-close" type="button"><span aria-hidden="true">−</span><span data-en="Close">收起</span></button></div>
         <div class="tracking-art" aria-label="UAV tracking a motorcycle"><svg class="tracking-scene" id="tracking-scene" viewBox="0 0 640 490" role="img" aria-labelledby="scene-title scene-desc">
           <title id="scene-title">A small journey, a tracking problem</title>
           <desc id="scene-desc">A motorcycle follows a mountain road while one or two UAVs track it. A conceptual animation with tracking, cooperation, and pause controls.</desc>
@@ -176,8 +176,8 @@
         <div class="scene-controls"><div class="scene-modes" role="group" aria-label="跟踪模式 / Tracking mode"><button class="active" type="button" data-mode="tracking" aria-pressed="true" data-en="Tracking">追踪</button><button type="button" data-mode="cooperation" aria-pressed="false" data-en="Teamwork">协同</button></div><button id="motion-toggle" type="button" aria-label="暂停动画 / Pause animation" aria-pressed="false"><span aria-hidden="true">Ⅱ</span></button></div>
       </section>
 
-      <section class="sidebar-panel music-panel" aria-labelledby="music-title">
-        <div class="panel-heading"><div><span class="eyebrow warm" data-en="ON REPEAT">最近在听</span><h2 id="music-title">四相</h2></div><svg class="icon"><use href="#i-wave"/></svg></div>
+      <section class="sidebar-panel music-panel" id="music-panel" aria-labelledby="music-title">
+        <div class="panel-heading"><div><span class="eyebrow warm" data-en="ON REPEAT">最近在听</span><h2 id="music-title">四相</h2></div><svg class="icon"><use href="#i-wave"/></svg><button class="companion-close" type="button"><span aria-hidden="true">−</span><span data-en="Close">收起</span></button></div>
         <div class="album-layout"><a class="album-cover-link" href="https://music.163.com/song?id=439121264" target="_blank" rel="noopener noreferrer" aria-label="在网易云音乐收听痛仰《四相》 / Listen to Si Xiang by Miserable Faith on NetEase Music"><img src="assets/sixiang-cover.jpg" width="400" height="400" alt="痛仰《今日青年》官方专辑封面 / Official album artwork for 今日青年" loading="lazy"></a><div class="album-info"><strong data-en="Miserable Faith">痛仰乐队</strong><span data-en="Album: 今日青年">专辑《今日青年》</span><span class="music-tag">INDIE ROCK</span></div></div>
         <div class="music-player"><button id="music-toggle" type="button" aria-pressed="false" aria-describedby="audio-status"><span class="play-symbol" aria-hidden="true">▶</span><span id="music-label">播放《四相》</span></button><span id="music-time" class="music-time">0:00</span></div>
         <label class="sr-only" for="music-progress" data-en="Seek within the song">调整播放进度</label><input id="music-progress" class="music-progress" type="range" min="0" max="100" value="0" step="0.1" disabled aria-valuetext="0:00">
@@ -191,6 +191,20 @@
   </div>
 
   <footer class="site-footer"><div><span>© <span id="current-year">2026</span> Zhaofeng Du</span><span data-en="Beijing Institute of Technology">北京理工大学</span><a href="#about"><span data-en="Back to top">回到顶部</span> ↑</a></div></footer>
+  <div id="mobile-companions" class="companion-widget" aria-label="骑行与音乐 / Riding and music">
+    <div id="companion-dock" class="companion-dock">
+      <button id="companion-ride" class="companion-launcher" type="button" aria-controls="ride-panel" aria-expanded="false">
+        <span id="companion-ride-preview" class="companion-preview" aria-hidden="true"></span>
+        <span class="companion-caption"><strong data-en="On the road">骑行与追踪</strong><span data-en="UAV tracking">无人机跟随</span></span>
+      </button>
+      <button id="companion-music" class="companion-launcher" type="button" aria-controls="music-panel" aria-expanded="false">
+        <span class="companion-cover"><img src="assets/sixiang-cover.jpg" alt="" width="40" height="40"><span class="companion-playing" aria-hidden="true"></span></span>
+        <span class="companion-caption"><strong>四相</strong><span id="companion-music-status">痛仰乐队</span></span>
+      </button>
+      <button id="companion-minimize" class="companion-minimize" type="button" aria-controls="companion-dock" aria-expanded="true"><span aria-hidden="true">⌄</span><span data-en="Hide">收起</span></button>
+    </div>
+    <button id="companion-restore" class="companion-restore" type="button" aria-controls="companion-dock" aria-expanded="false"><svg class="icon" aria-hidden="true"><use href="#i-drone"/></svg><span data-en="Ride · Music">骑行 · 四相</span><span class="companion-playing" aria-hidden="true"></span><span aria-hidden="true">⌃</span></button>
+  </div>
   <div id="toast" class="toast" role="status"></div>
   <dialog id="platform-dialog" class="platform-dialog" aria-labelledby="platform-dialog-title"><div class="dialog-header"><h2 id="platform-dialog-title">实物平台 01</h2><button id="platform-close" type="button" aria-label="关闭 / Close">×</button></div><div class="platform-large"><img id="platform-large-image" src="assets/uav-platform-01.png" alt=""></div><div class="gallery-navigation"><button id="platform-prev" type="button" aria-label="上一张 / Previous">←</button><span id="platform-count">1 / 3</span><button id="platform-next" type="button" aria-label="下一张 / Next">→</button></div></dialog>
 </body>
