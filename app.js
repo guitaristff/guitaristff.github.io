@@ -23,8 +23,8 @@
       audioTimeout: '歌曲加载超时。请重试，或通过网易云音乐收听。',
       audioPlaying: '正在播放痛仰《四相》', audioPaused: '播放已暂停',
       platform: '实物平台', imageAlt: '自建无人机实物平台',
-      rideWindow: '打开骑行浮窗', musicWindow: '打开《四相》音乐浮窗',
-      hideCompanions: '收起骑行与音乐浮栏', showCompanions: '展开骑行与音乐浮栏',
+      rideWindow: '展开骑行浮窗', musicWindow: '展开《四相》音乐浮窗',
+      hideRide: '收起骑行浮窗', hideMusic: '收起音乐浮窗',
       musicArtist: '痛仰乐队', compactPlaying: '正在播放', compactPaused: '已暂停',
       compactLoading: '正在加载', compactError: '点开重试'
     },
@@ -42,8 +42,8 @@
       audioTimeout: 'The song timed out. Retry or listen on NetEase Music.',
       audioPlaying: 'Playing 四相 by Miserable Faith', audioPaused: 'Music paused',
       platform: 'UAV platform', imageAlt: 'Custom-built UAV platform',
-      rideWindow: 'Open the riding window', musicWindow: 'Open the 四相 music window',
-      hideCompanions: 'Hide the riding and music bar', showCompanions: 'Show the riding and music bar',
+      rideWindow: 'Show the riding window', musicWindow: 'Show the 四相 music window',
+      hideRide: 'Minimize the riding window', hideMusic: 'Minimize the music window',
       musicArtist: 'Miserable Faith', compactPlaying: 'Playing', compactPaused: 'Paused',
       compactLoading: 'Loading', compactError: 'Tap to retry'
     }
@@ -389,106 +389,87 @@
     if (['loading', 'playing'].includes(musicState)) stopMusic();
   });
 
-  // On phones, reuse the same live scene and audio player in compact floating windows.
+  // Both original cards are immediately visible as independent windows on phones.
   const mobileLayout = matchMedia('(max-width: 640px), (max-width: 950px) and (max-height: 500px) and (pointer: coarse)');
   const companions = $('#mobile-companions');
   const lifeSidebar = $('#off-duty');
   const ridePanel = $('#ride-panel');
   const musicPanel = $('#music-panel');
-  const trackingArt = $('.tracking-art');
-  const sceneHome = document.createComment('Full-size riding scene');
-  trackingArt.before(sceneHome);
   const companionButtons = { ride: $('#companion-ride'), music: $('#companion-music') };
   const companionPanels = { ride: ridePanel, music: musicPanel };
-  const COMPACT_KEY = 'zhaofeng-companions-minimized';
-  let companionPanel = '';
-  let companionsMinimized = false;
-  try { companionsMinimized = sessionStorage.getItem(COMPACT_KEY) === 'true'; } catch { /* Keep the initial floating bar visible. */ }
+  const COMPACT_KEY = 'zhaofeng-floating-windows';
+  const minimizedWindows = {ride: false, music: false};
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(COMPACT_KEY));
+    for (const name of Object.keys(minimizedWindows)) minimizedWindows[name] = saved?.[name] === true;
+  } catch { /* Both windows start open when no preference is available. */ }
 
   function updateCompanionLabels() {
     $('#companion-ride').setAttribute('aria-label', t('rideWindow'));
-    $('#companion-music').setAttribute('aria-label', t('musicWindow'));
-    $('#companion-minimize').setAttribute('aria-label', t('hideCompanions'));
-    $('#companion-restore').setAttribute('aria-label', t('showCompanions'));
+    $('#ride-panel .companion-close').setAttribute('aria-label', t('hideRide'));
+    $('#music-panel .companion-close').setAttribute('aria-label', t('hideMusic'));
     const status = {playing: 'compactPlaying', paused: 'compactPaused', loading: 'compactLoading', error: 'compactError'};
-    $('#companion-music-status').textContent = t(status[musicState] || 'musicArtist');
+    const musicStatus = t(status[musicState] || 'musicArtist');
+    $('#companion-music-status').textContent = musicStatus;
+    $('#companion-music').setAttribute('aria-label', t('musicWindow') + ' · ' + musicStatus);
     $('#mobile-companions').classList.toggle('music-is-playing', musicState === 'playing');
+  }
+
+  function updateCompanionSpace() {
+    if (!mobileLayout.matches) return;
+    const height = Math.max(lifeSidebar.getBoundingClientRect().height, companions.getBoundingClientRect().height);
+    document.documentElement.style.setProperty('--companion-space', `${Math.ceil(height) + 24}px`);
   }
 
   function renderCompanions() {
     const mobile = mobileLayout.matches;
     document.documentElement.classList.toggle('mobile-companions', mobile);
-    document.documentElement.classList.toggle('companions-minimized', mobile && companionsMinimized);
-    lifeSidebar.classList.toggle('companion-open', mobile && Boolean(companionPanel));
-    for (const [name, panel] of Object.entries(companionPanels)) {
-      const active = mobile && companionPanel === name;
-      panel.classList.toggle('companion-active', active);
-      companionButtons[name].setAttribute('aria-expanded', String(active));
+    for (const name of Object.keys(companionPanels)) {
+      document.documentElement.classList.toggle(`${name}-minimized`, mobile && minimizedWindows[name]);
+      companionButtons[name].setAttribute('aria-expanded', String(!minimizedWindows[name]));
     }
-    // Move, rather than duplicate, the animated SVG so both views share its state.
-    if (mobile && companionPanel !== 'ride') $('#companion-ride-preview').append(trackingArt);
-    else sceneHome.after(trackingArt);
+    updateCompanionSpace();
   }
 
-  function closeCompanion(restoreFocus = false) {
-    const previous = companionPanel;
-    companionPanel = '';
+  function setWindowMinimized(name, minimized, focus = false) {
+    minimizedWindows[name] = minimized;
     renderCompanions();
-    if (restoreFocus && previous) companionButtons[previous].focus({preventScroll: true});
-  }
-
-  function openCompanion(name) {
-    if (!mobileLayout.matches) return;
-    closeMenu();
-    companionsMinimized = false;
-    companionPanel = companionPanel === name ? '' : name;
-    renderCompanions();
-    if (companionPanel) {
-      companionPanels[name].scrollTop = 0;
-      $('.companion-close', companionPanels[name]).focus({preventScroll: true});
+    try { sessionStorage.setItem(COMPACT_KEY, JSON.stringify(minimizedWindows)); } catch { /* Storage is optional. */ }
+    if (focus) {
+      const target = minimized ? companionButtons[name] : $('.companion-close', companionPanels[name]);
+      target.focus({preventScroll: true});
     }
   }
 
   for (const [name, button] of Object.entries(companionButtons)) {
-    button.addEventListener('click', () => openCompanion(name));
+    button.addEventListener('click', () => setWindowMinimized(name, false, true));
+    $('.companion-close', companionPanels[name]).addEventListener('click', () => setWindowMinimized(name, true, true));
   }
-  $$('.companion-close').forEach((button) => button.addEventListener('click', () => closeCompanion(true)));
-  $('#companion-minimize').addEventListener('click', () => {
-    companionsMinimized = true;
-    closeCompanion();
-    try { sessionStorage.setItem(COMPACT_KEY, 'true'); } catch { /* Storage is optional. */ }
-    $('#companion-restore').focus({preventScroll: true});
-  });
-  $('#companion-restore').addEventListener('click', () => {
-    companionsMinimized = false;
-    renderCompanions();
-    try { sessionStorage.setItem(COMPACT_KEY, 'false'); } catch { /* Storage is optional. */ }
-    companionButtons.ride.focus({preventScroll: true});
-  });
-  document.addEventListener('click', (event) => {
-    if (companionPanel && !lifeSidebar.contains(event.target) && !companions.contains(event.target)) closeCompanion();
-  });
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && companionPanel) closeCompanion(true);
+    if (event.key === 'Escape' && mobileLayout.matches && !platformDialog.open) {
+      setWindowMinimized('ride', true);
+      setWindowMinimized('music', true, true);
+    }
   });
-  window.addEventListener('scroll', () => {
-    if (companionPanel) closeCompanion();
-  }, {passive: true});
   $('.main-nav a[href="#off-duty"]').addEventListener('click', (event) => {
     if (!mobileLayout.matches) return;
     event.preventDefault();
-    event.stopPropagation();
-    openCompanion('ride');
+    setWindowMinimized('ride', false);
+    setWindowMinimized('music', false);
   });
   mobileLayout.addEventListener('change', () => {
-    const hadFloatingFocus = companions.contains(document.activeElement) || document.activeElement.matches('.companion-close');
-    companionPanel = '';
+    const hadFloatingFocus = document.activeElement.matches('.companion-restore-card, .companion-close');
     renderCompanions();
     if (hadFloatingFocus) {
-      const target = mobileLayout.matches ? (companionsMinimized ? $('#companion-restore') : companionButtons.ride) : $('#motion-toggle');
+      const target = mobileLayout.matches && minimizedWindows.ride ? companionButtons.ride : $('#motion-toggle');
       target.focus({preventScroll: true});
     }
   });
+  if ('ResizeObserver' in window) {
+    const sizeObserver = new ResizeObserver(updateCompanionSpace);
+    sizeObserver.observe(lifeSidebar);
+    sizeObserver.observe(companions);
+  }
   renderCompanions();
 
   $('#copy-email').addEventListener('click', async () => {

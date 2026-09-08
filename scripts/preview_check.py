@@ -50,7 +50,6 @@ def check_audio_recovery(browser, base):
     page.locator("#language-toggle").click()
     check("could not load" in page.locator("#audio-status").inner_text(), "Persistent source error translates to English")
     page.set_viewport_size({"width": 390, "height": 844})
-    page.locator("#companion-music").click()
     check(not overflow(page), "English playback error fits on mobile")
     page.locator(".music-panel").screenshot(path=str(OUT / "music-error-en.png"))
     context.unroute(audio_url)

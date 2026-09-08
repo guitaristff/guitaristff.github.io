@@ -14,8 +14,8 @@
   <title>杜兆丰 Zhaofeng Du | 无人机目标跟踪</title>
   <link rel="canonical" href="https://guitaristff.github.io/">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=mobile-float-1">
-  <script src="app.js?v=mobile-float-1" defer></script>
+  <link rel="stylesheet" href="styles.css?v=mobile-float-2">
+  <script src="app.js?v=mobile-float-2" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main" data-en="Skip to content">跳至正文</a>
@@ -192,18 +192,8 @@
 
   <footer class="site-footer"><div><span>© <span id="current-year">2026</span> Zhaofeng Du</span><span data-en="Beijing Institute of Technology">北京理工大学</span><a href="#about"><span data-en="Back to top">回到顶部</span> ↑</a></div></footer>
   <div id="mobile-companions" class="companion-widget" aria-label="骑行与音乐 / Riding and music">
-    <div id="companion-dock" class="companion-dock">
-      <button id="companion-ride" class="companion-launcher" type="button" aria-controls="ride-panel" aria-expanded="false">
-        <span id="companion-ride-preview" class="companion-preview" aria-hidden="true"></span>
-        <span class="companion-caption"><strong data-en="On the road">骑行与追踪</strong><span data-en="UAV tracking">无人机跟随</span></span>
-      </button>
-      <button id="companion-music" class="companion-launcher" type="button" aria-controls="music-panel" aria-expanded="false">
-        <span class="companion-cover"><img src="assets/sixiang-cover.jpg" alt="" width="40" height="40"><span class="companion-playing" aria-hidden="true"></span></span>
-        <span class="companion-caption"><strong>四相</strong><span id="companion-music-status">痛仰乐队</span></span>
-      </button>
-      <button id="companion-minimize" class="companion-minimize" type="button" aria-controls="companion-dock" aria-expanded="true"><span aria-hidden="true">⌄</span><span data-en="Hide">收起</span></button>
-    </div>
-    <button id="companion-restore" class="companion-restore" type="button" aria-controls="companion-dock" aria-expanded="false"><svg class="icon" aria-hidden="true"><use href="#i-drone"/></svg><span data-en="Ride · Music">骑行 · 四相</span><span class="companion-playing" aria-hidden="true"></span><span aria-hidden="true">⌃</span></button>
+    <button id="companion-ride" class="companion-restore-card" type="button" aria-controls="ride-panel" aria-expanded="true"><svg class="icon" aria-hidden="true"><use href="#i-drone"/></svg><span data-en="On the road">骑行与追踪</span><span aria-hidden="true">⌃</span></button>
+    <button id="companion-music" class="companion-restore-card" type="button" aria-controls="music-panel" aria-expanded="true"><svg class="icon" aria-hidden="true"><use href="#i-wave"/></svg><span>四相</span><span id="companion-music-status" class="sr-only">痛仰乐队</span><span class="companion-playing" aria-hidden="true"></span><span aria-hidden="true">⌃</span></button>
   </div>
   <div id="toast" class="toast" role="status"></div>
   <dialog id="platform-dialog" class="platform-dialog" aria-labelledby="platform-dialog-title"><div class="dialog-header"><h2 id="platform-dialog-title">实物平台 01</h2><button id="platform-close" type="button" aria-label="关闭 / Close">×</button></div><div class="platform-large"><img id="platform-large-image" src="assets/uav-platform-01.png" alt=""></div><div class="gallery-navigation"><button id="platform-prev" type="button" aria-label="上一张 / Previous">←</button><span id="platform-count">1 / 3</span><button id="platform-next" type="button" aria-label="下一张 / Next">→</button></div></dialog>
