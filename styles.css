@@ -356,22 +356,23 @@ html[lang="en"] .research-copy h3 span { font-size: 14px; }
   .profile-sidebar { position: static; width: 100%; max-height: none; overflow: visible; }
   .profile-card { position: relative; display: grid; grid-template-columns: 106px 1fr; column-gap: 17px; padding: 20px; align-items: start; }
   .profile-avatar { width: 103px; height: 103px; margin: 0; grid-column: 1; grid-row: 1 / 5; }
-  .profile-name, html[lang="en"] .profile-name { grid-column: 2; grid-row: 1; text-align: left; margin: 0; font-size: 21px; line-height: 1.3; }
-  .profile-name span, html[lang="en"] .profile-name span { font-size: 13px; line-height: 1.7; margin-top: 3px; }
-  .profile-badge { grid-column: 2; grid-row: 2; margin: 7px 0 0; justify-self: start; font-size: 10px; }
-  .profile-focus { grid-column: 2; grid-row: 3; font-size: 12px; line-height: 1.6; margin: 9px 0 0; text-align: left; }
+  .profile-name, html[lang="en"] .profile-name { grid-column: 2; grid-row: 1; text-align: left; margin: 0; font-size: 23px; line-height: 1.3; }
+  .profile-name span, html[lang="en"] .profile-name span { font-size: 14px; line-height: 1.7; margin-top: 3px; }
+  .profile-badge { grid-column: 2; grid-row: 2; margin: 7px 0 0; justify-self: start; font-size: 11px; }
+  .profile-focus { grid-column: 2; grid-row: 3; font-size: 13px; line-height: 1.6; margin: 9px 0 0; text-align: left; }
   .profile-focus br { display: none; }
   .profile-details { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; column-gap: 22px; margin-top: 15px; }
   .profile-details > div { margin-top: 12px; }
   .profile-details > div:last-child { grid-column: 1 / -1; }
-  .profile-details dt { font-size: 10px; }
-  .profile-details dd { font-size: 12px; line-height: 1.7; }
+  .profile-details dt { font-size: 11px; }
+  .profile-details dd { font-size: 13px; line-height: 1.7; }
   .profile-details dd br { display: none; }
-  .profile-details .secondary-line { display: block; font-size: 10px; }
+  .profile-details .secondary-line { display: block; font-size: 11px; }
+  .profile-details .advisor-award { font-size: 12px; }
   .profile-connect { grid-column: 1 / -1; margin-top: 16px; padding-top: 10px; display: flex; flex-wrap: wrap; gap: 2px 21px; }
-  .profile-connect h3 { width: 100%; font-size: 10px; margin-bottom: 0; }
-  .profile-connect a { justify-content: flex-start; gap: 6px; font-size: 11px; min-height: 34px; }
-  .sidebar-interests { grid-column: 1 / -1; font-size: 11px; margin-top: 7px; padding-top: 12px; }
+  .profile-connect h3 { width: 100%; font-size: 11px; margin-bottom: 0; }
+  .profile-connect a { justify-content: flex-start; gap: 6px; font-size: 12px; min-height: 34px; }
+  .sidebar-interests { grid-column: 1 / -1; font-size: 12px; margin-top: 7px; padding-top: 12px; }
   .main-content { width: 100%; }
   .page-title h1, html[lang="en"] .page-title h1 { font-size: 30px; }
   .page-title h1 span, html[lang="en"] .page-title h1 span { font-size: .75em; }
@@ -454,8 +455,8 @@ html[lang="en"] .research-copy h3 span { font-size: 14px; }
   .page-layout { width: calc(100% - 26px); }
   .profile-card { padding: 17px; grid-template-columns: 88px 1fr; column-gap: 14px; }
   .profile-avatar { width: 87px; height: 87px; }
-  .profile-name, html[lang="en"] .profile-name { font-size: 19px; }
-  .profile-focus { font-size: 11px; }
+  .profile-name, html[lang="en"] .profile-name { font-size: 21px; }
+  .profile-focus { font-size: 12px; }
   .profile-details { column-gap: 17px; }
   .page-title h1, html[lang="en"] .page-title h1 { font-size: 26px; }
   .intro-panel { padding-right: 18px; padding-left: 23px; }
@@ -484,7 +485,7 @@ html.mobile-companions { scroll-padding-bottom: calc(var(--companion-space, 230p
   bottom: calc(12px + env(safe-area-inset-bottom, 0px)); width: min(420px, calc(100vw - 24px));
   margin: 0; pointer-events: none;
 }
-.mobile-companions .life-sidebar { z-index: 40; }
+.mobile-companions .life-sidebar { z-index: 40; align-items: stretch; }
 .mobile-companions .companion-widget { z-index: 41; }
 .mobile-companions #ride-panel, .mobile-companions #companion-ride { grid-column: 1; grid-row: 1; }
 .mobile-companions #music-panel, .mobile-companions #companion-music { grid-column: 2; grid-row: 1; }
