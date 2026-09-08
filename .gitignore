@@ -1,0 +1,10 @@
+.tools/
+.preview/
+_site/
+zhaofeng-du-website.zip
+__pycache__/
+*.log
+杜兆丰-个人简历.pdf
+.deploy/
+.env
+.env.*

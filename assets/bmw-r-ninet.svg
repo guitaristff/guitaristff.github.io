@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 245" role="img" aria-labelledby="title desc">
+  <title id="title">Motorcycle</title>
+  <desc id="desc">A black motorcycle with a boxer engine, gold inverted forks, round headlamp, spoke wheels, shaft drive, and twin exhausts.</desc>
+  <defs>
+    <linearGradient id="tank" x2=".3" y2="1"><stop stop-color="#434950"/><stop offset=".5" stop-color="#21262b"/><stop offset="1" stop-color="#10171b"/></linearGradient>
+    <linearGradient id="metal" x2="0" y2="1"><stop stop-color="#e4e8e9"/><stop offset=".5" stop-color="#8d969b"/><stop offset="1" stop-color="#bac2c5"/></linearGradient>
+    <g id="wheel"><circle r="45" fill="#20282c"/><circle r="36" fill="#c4ccce"/><circle r="32" fill="#f2f3ec"/><g stroke="#889398" stroke-width="1.15"><path d="M-31 0h62M0-31v62m-22-22 44-44m-44 0 44 44M-29-12l58 24M-12-29l24 58M-29 12l58-24M-12 29l24-58"/></g><circle r="22" fill="none" stroke="#adb5b6" stroke-width="5"/><circle r="16" fill="none" stroke="#7e8b8f" stroke-dasharray="2 5" stroke-width="2"/><circle r="7" fill="#555f63"/><circle r="3" fill="#c9d1d3"/></g>
+  </defs>
+  <ellipse cx="207" cy="221" rx="176" ry="5" fill="#253e42" opacity=".12"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <use href="#wheel" transform="translate(88 172)"/><use href="#wheel" transform="translate(334 172)"/>
+    <path d="M88 171 172 152l29 17-101 17Z" fill="#454e51" stroke="#222d32" stroke-width="3"/>
+    <circle cx="88" cy="172" r="13" fill="#5a6265" stroke="#abb4b6" stroke-width="3"/>
+    <path d="m90 130 32-19 55 49m-59-46 25 58 118-8 30-64m-35 67-22-50-64-4-19 51" fill="none" stroke="#242e33" stroke-width="7"/>
+    <path d="m125 113-16 53" stroke="#aeb7b8" stroke-width="7"/>
+    <path d="m118 121-11 2 9 8-13 2 9 7-13 2 8 8-9 2" fill="none" stroke="#6d858c" stroke-width="2.3"/>
+    <path d="M145 105c7-29 46-41 75-38 19 1 42 20 52 39l-21 21-55-1-38-11Z" fill="url(#tank)" stroke="#101a20" stroke-width="2"/>
+    <path d="M163 94c13-20 37-23 52-21 13 0 28 7 39 21-30-7-59-6-91 0Z" fill="#8d999d" opacity=".65"/>
+    <path d="M175 105c23-2 48 4 66 14" fill="none" stroke="#aeb7b9" stroke-width="1.5"/>
+    <path d="M75 104c27-3 50-3 72 1l13 12-77-2Z" fill="#343b3e" stroke="#171f24" stroke-width="3"/>
+    <path d="M64 115h34l-14 8H62Z" fill="#222c31"/><path d="M61 114h9" stroke="#b4473c" stroke-width="5"/>
+    <path d="m65 121-15 25-15-5" fill="none" stroke="#465157" stroke-width="3"/>
+    <path d="M174 124h60l23 29-5 31-62 8-23-33Z" fill="#737d81" stroke="#313c41" stroke-width="3"/>
+    <ellipse cx="222" cy="170" rx="22" ry="19" fill="#9ba4a7" stroke="#505d63" stroke-width="2"/>
+    <path d="M153 124h48l9 13-6 24-51-2-14-14Z" fill="url(#metal)" stroke="#515d63" stroke-width="3"/>
+    <path d="M148 132h53m-55 6h57m-56 6h57m-55 6h54" stroke="#5d6a70" stroke-width="2"/>
+    <path d="m153 155-3 13 16 18 57 4" fill="none" stroke="#aab3b5" stroke-width="6"/>
+    <path d="M160 159c-12 18-1 37 19 39l-90 1" fill="none" stroke="#b2bcbe" stroke-width="6"/>
+    <path d="M160 160c2 23 12 22 20 27L90 188" fill="none" stroke="#7e898d" stroke-width="5"/>
+    <path d="m69 183 54-1 4 10-58 1Z" fill="url(#metal)" stroke="#68777d" stroke-width="1.5"/>
+    <path d="m68 198 58-2 1 10-58 2Z" fill="url(#metal)" stroke="#68777d" stroke-width="1.5"/>
+    <path d="M69 185v5m0 11v4" stroke="#27343b" stroke-width="4"/>
+    <path d="m278 83 42 89m-29-95 43 95" fill="none" stroke="#A28450" stroke-width="8"/>
+    <path d="m280 87 21 44m-8-46 19 42" fill="none" stroke="#C3A971" stroke-width="6"/>
+    <path d="m302 134 18 38m-7-42 20 42" fill="none" stroke="#c5cbcb" stroke-width="5"/>
+    <path d="M312 127c21-7 43 0 57 12" fill="none" stroke="#28333a" stroke-width="7"/>
+    <path d="m278 82-8-20 13-13 22 1" fill="none" stroke="#34434b" stroke-width="5"/>
+    <path d="m300 48 12-11m-48 18-4-18" fill="none" stroke="#78868b" stroke-width="3"/>
+    <ellipse cx="316" cy="34" rx="12" ry="6" fill="#39464d"/><ellipse cx="258" cy="33" rx="12" ry="6" fill="#39464d"/>
+    <ellipse cx="286" cy="62" rx="12" ry="7" fill="#cbd3d4" stroke="#36454c" stroke-width="3"/>
+    <path d="M302 74c19-9 31 5 28 21l-20 5Z" fill="#2a373e"/>
+    <ellipse cx="329" cy="85" rx="9" ry="14" fill="#f3eacb" stroke="#aab6b8" stroke-width="3"/>
+    <path d="M324 76v17" stroke="#fffcef" stroke-width="2"/><circle cx="303" cy="107" r="4" fill="#dba05c"/>
+    <circle cx="246" cy="99" r="10" fill="#14232c"/><circle cx="246" cy="99" r="6.8" fill="#eff5f3"/>
+    <path d="M246 92.2a6.8 6.8 0 0 1 6.8 6.8H246Zm0 13.6a6.8 6.8 0 0 1-6.8-6.8h6.8Z" fill="#315F88"/>
+  </g>
+</svg>
