@@ -11,7 +11,7 @@
   --page-width: 1480px;
   --page-gutter: 20px;
   --page-gap: 28px;
-  --profile-width: 320px;
+  --profile-width: 336px;
   --life-width: 296px;
   --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
@@ -219,14 +219,14 @@ html[lang="en"] .main-nav a { font-size: 13px; }
 html[lang="en"] .research-copy h3 span { font-size: 14px; }
 
 @media (min-width: 1550px) {
-  :root { --profile-width: 336px; --life-width: 312px; --page-gap: 32px; }
+  :root { --profile-width: 352px; --life-width: 312px; --page-gap: 32px; }
   .intro-panel { padding: 28px 32px 25px 35px; }
   .intro-panel p { font-size: 16px; }
   .profile-connect a { font-size: 13px; }
   .page-title h1, html[lang="en"] .page-title h1 { font-size: 40px; }
 }
 @media (max-width: 1280px) {
-  :root { --profile-width: 280px; --life-width: 260px; --page-gap: 22px; --page-gutter: 16px; }
+  :root { --profile-width: 320px; --life-width: 260px; --page-gap: 22px; --page-gutter: 16px; }
   .profile-card { padding: 20px 16px 14px; }
   .profile-avatar { width: 147px; height: 147px; }
   .profile-name { font-size: 22px; }
@@ -495,7 +495,7 @@ html[lang="en"] .research-copy h3 span { font-size: 14px; }
   }
 }
 /* Shorter desktop windows use a compact profile without an inner scrollbar. */
-@media (min-width: 1101px) and (max-height: 1009px) {
+@media (min-width: 1101px) and (max-height: 1199px) {
   .profile-card { display: grid; grid-template-columns: 96px minmax(0,1fr); column-gap: 15px; padding: 20px; align-items: start; }
   .profile-avatar { width: 96px; height: 96px; margin: 0; grid-column: 1; grid-row: 1 / 3; }
   .profile-name, html[lang="en"] .profile-name { grid-column: 2; grid-row: 1; margin: 0; font-size: 23px; line-height: 1.3; text-align: left; }
@@ -505,7 +505,7 @@ html[lang="en"] .research-copy h3 span { font-size: 14px; }
   .profile-details > div { margin-top: 12px; }
   .profile-connect { grid-column: 1 / -1; margin-top: 16px; }
 }
-@media (min-width: 1101px) and (max-height: 899px) {
+@media (min-width: 1101px) and (max-height: 999px) {
   .life-sidebar .panel-heading { padding: 10px 13px 9px; }
   .life-sidebar .panel-heading h2 { font-size: 18px; }
   .life-sidebar .tracking-scene { height: clamp(120px, calc(100dvh - 520px), 180px); }
@@ -515,18 +515,20 @@ html[lang="en"] .research-copy h3 span { font-size: 14px; }
   .life-sidebar .sidebar-panel + .sidebar-panel { margin-top: 16px; }
   .sidebar-signoff { font-size: 11px; margin-top: 12px; }
 }
-@media (min-width: 1101px) and (max-height: 810px) {
+@media (min-width: 1101px) and (max-height: 939px) {
   .page-layout { margin-top: 15px; }
   .profile-sidebar, .life-sidebar { top: 86px; }
   .profile-card { grid-template-columns: 88px minmax(0,1fr); padding: 16px; }
   .profile-avatar { width: 88px; height: 88px; }
   .profile-name, html[lang="en"] .profile-name { font-size: 21px; }
-  .profile-details > div { display: grid; grid-template-columns: 76px minmax(0,1fr); gap: 9px; margin-top: 10px; }
+  .profile-details > div { display: grid; grid-template-columns: 86px minmax(0,1fr); gap: 10px; margin-top: 10px; }
   .profile-details dd { margin: 0; }
   .profile-details dt { align-items: baseline; }
   .profile-details dt > :last-child { display: none; }
   .profile-connect { padding-top: 8px; margin-top: 12px; }
   .profile-connect a { min-height: 30px; }
+}
+@media (min-width: 1101px) and (max-height: 810px) {
   .life-sidebar .tracking-scene { height: clamp(110px, calc(100dvh - 490px), 150px); }
   .life-sidebar .music-note, .life-sidebar .sidebar-signoff { display: none; }
   .life-sidebar .music-source { margin-bottom: 12px; }
@@ -604,6 +606,99 @@ html.mobile-companions { scroll-padding-bottom: calc(var(--companion-space, 230p
 .mobile-companions .music-is-playing .companion-playing { display: block; }
 .mobile-companions .toast { bottom: calc(var(--companion-space, 230px) + env(safe-area-inset-bottom, 0px)); }
 
+/* Readable academic typography, with the same hierarchy in both languages. */
+:root {
+  --font-body: 18px;
+  --font-detail: 17px;
+  --font-display: 40px;
+  --font-heading: 28px;
+  --font-profile: 16px;
+  --font-profile-label: 13px;
+  --font-profile-small: 13px;
+  --font-profile-name: 26px;
+  --font-profile-link: 14px;
+  --font-panel: 16px;
+  --font-panel-heading: 22px;
+}
+body { font-size: var(--font-body); }
+.main-nav a, html[lang="en"] .main-nav a { font-size: 15px; }
+.language-toggle { font-size: 13px; }
+.page-title h1, html[lang="en"] .page-title h1 { font-size: var(--font-display); }
+.page-title p { font-size: 15px; line-height: 1.8; }
+.intro-panel .eyebrow { font-size: 15px; }
+.intro-panel h2, html[lang="en"] .intro-panel h2 { font-size: calc(var(--font-heading) + 2px); }
+.intro-panel p { font-size: var(--font-body); line-height: 1.75; }
+.section-heading h2, .contact-panel h2 { font-size: var(--font-heading); }
+.section-heading .eyebrow, .contact-panel .eyebrow { font-size: 13px; }
+.research-copy h3 { font-size: 20px; }
+.research-copy h3 span, html[lang="en"] .research-copy h3 span { font-size: 18px; }
+.research-copy p, .section-description, .education-list p, .honors-list li > span, .contact-panel p { font-size: var(--font-detail); line-height: 1.75; }
+.intro-links a, .text-link, .education-note, .more-honors summary, .more-honors ul { font-size: 14px; }
+.education-list h3 { font-size: 18px; }
+.education-date { font-size: 14px; }
+.honors-list time, .gallery-hint { font-size: 13px; }
+.honors-list strong { font-size: 12px; }
+.platform-grid figcaption strong { font-size: 13px; }
+.platform-grid figcaption > span { font-size: 10px; }
+.contact-email { font-size: 18px; }
+.contact-actions button, .site-footer > div, .site-footer a { font-size: 13px; }
+.profile-name, html[lang="en"] .profile-name { font-size: var(--font-profile-name); }
+.profile-name span, html[lang="en"] .profile-name span { font-size: 16px; }
+.profile-badge { font-size: var(--font-profile-label); }
+.profile-details dt, .profile-connect h3 { font-size: var(--font-profile-label); }
+.profile-details dd { font-size: var(--font-profile); line-height: 1.65; }
+.profile-details .secondary-line, .profile-details .advisor-award { font-size: var(--font-profile-small); }
+.profile-connect a { font-size: var(--font-profile-link); }
+.life-sidebar .panel-heading h2 { font-size: var(--font-panel-heading); }
+.life-sidebar .panel-heading .eyebrow { font-size: 12px; }
+.album-info strong { font-size: var(--font-panel); }
+.album-info > span:not(.music-tag) { font-size: 13px; }
+.album-info .music-tag { font-size: 10px; }
+#music-toggle { font-size: 14px; }
+.music-time, .music-source, .music-source a { font-size: 12px; }
+.music-note, .sidebar-signoff { font-size: 14px; }
+.scene-modes button { font-size: 13px; }
+@media (max-width: 1280px) {
+  .main-nav a, html[lang="en"] .main-nav a { font-size: 14px; }
+}
+@media (min-width: 851px) {
+  .education-list li { grid-template-columns: 160px minmax(0,1fr); }
+}
+@media (max-width: 1100px) {
+  .main-nav a, html[lang="en"] .main-nav a { font-size: 13px; }
+}
+@media (max-width: 850px) {
+  :root { --font-body: 17px; --font-detail: 16px; --font-display: 34px; --font-heading: 26px; --font-profile: 15px; }
+  .main-nav a, html[lang="en"] .main-nav a { font-size: 15px; }
+}
+@media (max-width: 640px) {
+  :root { --font-body: 16px; --font-display: 32px; --font-profile: 16px; --font-profile-link: 15px; }
+  .page-title p { font-size: 14px; }
+  .research-copy h3 span, html[lang="en"] .research-copy h3 span { font-size: 17px; }
+  .contact-email { font-size: 16px; }
+  .profile-details { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 360px) {
+  :root { --font-display: 30px; --font-profile-name: 24px; }
+}
+@media (min-width: 1101px) and (max-height: 810px) {
+  :root { --font-profile: 15px; --font-profile-label: 12px; --font-profile-small: 12px; --font-profile-name: 24px; --font-panel: 15px; --font-panel-heading: 20px; }
+  .profile-details > div { margin-top: 8px; }
+}
+@media (min-width: 1101px) and (max-height: 710px) {
+  :root { --font-profile: 14px; --font-profile-label: 11px; --font-profile-small: 11px; --font-profile-name: 22px; --font-profile-link: 13px; --font-panel: 14px; }
+  .profile-name span, html[lang="en"] .profile-name span { font-size: 14px; }
+  .profile-details > div { margin-top: 4px; }
+  .profile-details dd { line-height: 1.45; }
+  .profile-details .secondary-line, .profile-details .advisor-award { line-height: 1.45; }
+  .life-sidebar .tracking-scene { height: clamp(90px, calc(100dvh - 520px), 140px); }
+  .life-sidebar .album-cover-link, .life-sidebar .album-cover-link img { width: 64px; height: 64px; }
+}
+.mobile-companions .life-sidebar .panel-heading h2 { font-size: 13px; }
+.mobile-companions .life-sidebar .scene-modes button { font-size: 10px; padding-inline: 2px; }
+.mobile-companions .life-sidebar .album-info strong { font-size: 11px; }
+.mobile-companions .life-sidebar #music-toggle { font-size: 12px; }
+.mobile-companions .life-sidebar .music-source a, .mobile-companions .life-sidebar .music-time { font-size: 10px; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
